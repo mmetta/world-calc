@@ -1,0 +1,81 @@
+{
+    "tipos": [
+        "Álbum Slim",
+        "Álbum Premium"
+    ],
+    "tamanhoP": [
+        "15 x 15 (15x30)",
+        "20 x 20 (20x40)",
+        "25 x 20 (25x40)",
+        "20 x 30 (20x60)",
+        "25 x 25 (25x50)",
+        "25 x 30 (30x50)",
+        "25 x 30 (25x60)",
+        "30 x 20 (30x40)",
+        "30 x 30 (30x60)",
+        "30 x 35 (30x70)",
+        "30 x 40 (30x80)",
+        "35 x 35 (35x70)",
+        "40 x 40 (40x80)"
+    ],
+    "tamanhoS": [
+        "15 x 15 (15x30)",
+        "15 x 21 (15x42)",
+        "20 x 20 (20x40)",
+        "20 x 25 (20x50)",
+        "25 x 20 (25x40)",
+        "25 x 25 (25x50)",
+        "20 x 30 (20x60)",
+        "25 x 30 (25x60)",
+        "25 x 35 (25x70)"
+    ],
+    "capa": [
+        "Foto",
+        "Tecido/sintético",
+        "Couro natural",
+        "Madeira",
+        "Capa acrílico",
+        "Capa cristal",
+        "Capa imã",
+        "Capa com janela"
+    ],
+    "laminasP": [
+        "10",
+        "15",
+        "20",
+        "25",
+        "30",
+        "35",
+        "40"
+    ],
+    "laminasS": [
+        "10",
+        "15",
+        "20"
+    ],
+    "laminacao": [
+        "Verniz fosco",
+        "Plástico fosco",
+        "Plástico brilho",
+        "Silk/linho",
+        "Vevelt"
+    ],
+    "acessorios": [
+        "Gravação laser",
+        "Baixo relevo",
+        "Luva",
+        "Caixa presente",
+        "Box laço/foto",
+        "Box couro legítimo",
+        "Tampa acrílica para Box",
+        "Maleta"
+    ],
+    "envio": [
+        "SIGI Pro",
+        "WeTransfer",
+        "Google Drive",
+        "WhatsApp",
+        "Email",
+        "Pendrive"
+    ]
+}
