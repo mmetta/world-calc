@@ -3,7 +3,8 @@ import { getDatabase, ref, get, child } from 'firebase/database'
 
 const state = {
     produtos: [],
-    precos: []
+    precos: [],
+    version: ''
 }
 
 const getters = {
@@ -12,10 +13,24 @@ const getters = {
     },
     precos(state) {
         return state.precos
+    },
+    version(state) {
+        return state.version
     }
 }
 
 const actions = {
+    loadVersion({ commit }) {
+        let manifest = document.querySelector('link[rel="manifest"]')
+        let file = manifest.href
+        let v = ''
+        fetch(file)
+            .then(response => response.json())
+            .then(data => {
+                v = data
+                commit('setVersion', v.version)
+            })
+    },
     loadProdutos({ commit }) {
         const db = getDatabase(firebaseApp)
         const dbRef = ref(db)
@@ -52,6 +67,9 @@ const mutations = {
     },
     setPrecos(state, obj) {
         state.precos = obj
+    },
+    setVersion(state, n) {
+        state.version = 'v - ' + n
     }
 }
 

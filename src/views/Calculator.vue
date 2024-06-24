@@ -62,7 +62,7 @@
             v-model="extras"
             max="10"
             min="0"
-            label="Lâminas extras"
+            label="Extras"
             @click="setPaginas()"
             @change="valor = ''"
           ></v-text-field>

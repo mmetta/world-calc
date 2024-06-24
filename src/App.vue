@@ -3,6 +3,8 @@
     <v-app-bar app color="teal" fixed dark>
       <v-img max-width="152" class="ml-2" src="./assets/World-white.png"></v-img>
       <v-spacer></v-spacer>
+      <span style="font-size: 9pt;">{{ version }}</span>
+      <v-spacer></v-spacer>
       <v-btn
         icon
         link
@@ -17,15 +19,45 @@
     <v-main>
       <router-view />
     </v-main>
+
+    <v-snackbar multi-line centered :value="updateExists" :timeout="-1" color="indigo">
+      Novo conteúdo disponível para o APP
+      <v-btn text @click="refreshApp">
+        <v-icon class="mr-2">mdi-autorenew</v-icon>
+        atualizar
+      </v-btn>
+    </v-snackbar>
+
   </v-app>
 </template>
 
 <script>
+import update from "./mixins/update";
+
 export default {
   name: "App",
-
+  computed: {
+    version() {
+      return this.$store.getters.version;
+    },
+  },
+  mixins: [update],
   data: () => ({
-    //
+    drawer: false,
+    group: null,
+    deferredPrompt: null,
   }),
+  created() {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      this.deferredPrompt = e;
+    });
+  },
+  methods: {
+    async install() {
+      this.deferredPrompt.prompt();
+    },
+  }
 };
 </script>
