@@ -165,6 +165,9 @@
 export default {
   name: "ordem-servico",
   computed: {
+    user() {
+      return this.$store.getters.user
+    },
     produtos() {
       return this.$store.getters.produtos;
     },
@@ -313,6 +316,9 @@ export default {
         valor += parseFloat(this.calcCapa());
         this.valor = valor.toFixed(2);
       }
+      if(this.user.email !== "mfmetta@gmail.com") {
+        this.salvarCalc()
+      }
     },
     calcAcessorios() {
       let v = 0;
@@ -350,6 +356,31 @@ export default {
       p3 = p3.replace(",", ".");
       v += parseFloat(p3);
       return parseFloat(v);
+    },
+    salvarCalc() {
+      let acessorios = [];
+      for (let i = 0; i < this.produtos.acessorios.length; i++) {
+        const el = this.produtos.acessorios[i];
+        if (this.item[i]) {
+          acessorios.push(el);
+        }
+      }
+      const obj = {
+        clienteId: this.user.uid,
+        clienteEmail: this.user.email,
+        clientePhone: this.user.tel,
+        acessorios: acessorios,
+        tipo: this.tipo,
+        tamanho: this.tamanho,
+        laminas: this.laminas,
+        extras: this.extras,
+        paginas: this.paginas,
+        capa: this.capa,
+        laminacao: this.laminacao,
+        valor: this.valor,
+        data: this.dataHora(),
+      };
+      this.$store.dispatch('saveCalc', obj)
     },
     limpar() {
       this.tamanho = "";

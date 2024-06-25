@@ -26,17 +26,17 @@ export default {
     },
     error() {
       return this.$store.getters.error;
+    },
+    logado() {
+      return this.$store.getters.logado;
     }
   },
   watch: {
-    user(i) {
+    logado(i) {
       console.log(i)
-      this.$store.dispatch('loadUser', i.uid)
-      if(i.email){
+      if(this.user.email){
         this.$router.push('/calc')
-      } else (
-        this.$router.push('/config')
-      )
+      }
     },
     error(i) {
       if(i) {
@@ -59,8 +59,8 @@ export default {
       this.disabled = true
       this.logging = true
       this.msg = ""
-        this.$store.dispatch('login')
-      }
+      this.$store.dispatch('login')
     }
+  }
 };
 </script>

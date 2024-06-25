@@ -17,6 +17,7 @@ new Vue({
     this.$store.dispatch('loadProdutos')
     this.$store.dispatch('loadPrecos')
     this.$store.dispatch('loadVersion')
+    this.$store.dispatch('onChanged')
   },
   render: h => h(App)
 }).$mount('#app')

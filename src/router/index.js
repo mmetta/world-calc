@@ -1,20 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
+import AuthGuard from './auth-guard'
+import HomeView from '../views/HomeView.vue'
 import Calc from '../views/Calculator.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: HomeView
-  // },
   {
     path: '/',
+    name: 'home',
+    component: HomeView
+  },
+  {
+    path: '/calc',
     name: 'calc-page',
-    component: Calc
+    component: Calc,
+    beforeEnter: AuthGuard
   },
   {
     path: '/about',

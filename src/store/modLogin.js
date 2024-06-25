@@ -1,4 +1,5 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
+import { firebaseApp } from "../firebase"
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
 const state = {
     logado: {},
@@ -16,14 +17,15 @@ const getters = {
 
 const actions = {
     login({ commit }) {
-        const auth = getAuth();
+        const auth = getAuth(firebaseApp);
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
             .then((result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
-                // const credential = GoogleAuthProvider.credentialFromResult(result);
-                // const token = credential.accessToken;
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
                 // The signed-in user info.
+                console.log(token)
                 const user = result.user;
                 commit("setLog", user)
             }).catch((error) => {
@@ -37,18 +39,6 @@ const actions = {
                 const obj = { errorCode, errorMessage, email, credential }
                 commit("setError", obj)
             });
-    },
-    onChanged({ commit }) {
-        const auth = getAuth();
-        onAuthStateChanged(auth, (userCredential) => {
-            const uid = userCredential ? userCredential.uid : null
-            if (uid) {
-                commit('setLogado', uid)
-            } else {
-                // User is signed out
-                commit('setLogado', false)
-            }
-        });
     },
     logOut({ commit }) {
         const auth = getAuth();
@@ -65,7 +55,7 @@ const actions = {
 
 const mutations = {
     setLog(state, obj) {
-        state.user = obj
+        state.logado = obj
     },
     setError(state, obj) {
         state.error = obj

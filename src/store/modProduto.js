@@ -1,5 +1,5 @@
 import { firebaseApp } from "../firebase"
-import { getDatabase, ref, get, child } from 'firebase/database'
+import { getDatabase, ref, push, get, child } from "firebase/database"
 
 const state = {
     produtos: [],
@@ -59,6 +59,18 @@ const actions = {
             console.error(error)
         })
     },
+    saveCalc({ commit }, obj) {
+        const db = getDatabase(firebaseApp)
+        let key
+        push(ref(db, 'calcs/'), obj)
+            .then((data) => {
+                key = data.key
+                return key
+            })
+            .then(key => {
+                commit('saveCalc', key)
+            })
+    },
 }
 
 const mutations = {
@@ -70,7 +82,10 @@ const mutations = {
     },
     setVersion(state, n) {
         state.version = 'v - ' + n
-    }
+    },
+    saveCalc(obj) {
+        console.log(obj)
+    },
 }
 
 export default {

@@ -1,4 +1,5 @@
 import { firebaseApp } from '../firebase'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, child, get } from 'firebase/database'
 
 const db = getDatabase(firebaseApp)
@@ -30,6 +31,29 @@ const actions = {
         }).catch((error) => {
             console.error(error)
         })
+    },
+    onChanged({ commit }) {
+        const auth = getAuth(firebaseApp);
+        onAuthStateChanged(auth, (userCredential) => {
+            const uid = userCredential ? userCredential.uid : null
+            const nome = userCredential ? userCredential.displayName : null
+            const email = userCredential ? userCredential.email : null
+            const phoneNumber = userCredential ? userCredential.phoneNumber : null
+            if (uid) {
+                const obj = {
+                    uid: uid,
+                    nome: nome,
+                    email: email,
+                    tel: phoneNumber
+                }
+                console.log(obj)
+                commit('setLogado', uid)
+                commit('setUser', obj)
+            } else {
+                // User is signed out
+                commit('setLogado', false)
+            }
+        });
     },
     setUser({ commit }, obj) {
         commit('setUser', obj)

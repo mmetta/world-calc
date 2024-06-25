@@ -51,7 +51,6 @@ export default {
     },
     user() {
       const u = this.$store.getters.user;
-      console.log(u)
       return u
     }
   },
@@ -74,6 +73,8 @@ export default {
     },
     logOut() {
       this.$store.dispatch('logOut')
+      this.$store.dispatch("setUser", {});
+      this.$router.push("/");
     }
   }
 };
