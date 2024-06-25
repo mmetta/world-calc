@@ -14,6 +14,15 @@
       >
         <v-icon>mdi-home</v-icon>
       </v-btn>
+      <v-btn
+        v-if="user.uid"
+        icon
+        class="mr-2"
+        color="white"
+        @click="logOut()"
+      >
+        <v-icon>mdi-power</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -40,6 +49,11 @@ export default {
     version() {
       return this.$store.getters.version;
     },
+    user() {
+      const u = this.$store.getters.user;
+      console.log(u)
+      return u
+    }
   },
   mixins: [update],
   data: () => ({
@@ -58,6 +72,9 @@ export default {
     async install() {
       this.deferredPrompt.prompt();
     },
+    logOut() {
+      this.$store.dispatch('logOut')
+    }
   }
 };
 </script>

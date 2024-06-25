@@ -226,8 +226,8 @@ export default {
     setMostruario() {
       if (
         this.capa === "Tecido/sintético" ||
-        this.capa === "Madeira" ||
-        this.capa === "Couro natural"
+        this.capa === "Capa Madeira" ||
+        this.capa === "Capa Couro natural"
       ) {
         return true;
       } else {
@@ -262,17 +262,15 @@ export default {
       }
       const obj = {
         clienteId: this.user.uid,
-        clienteNome: this.user.displayName,
         acessorios: acessorios,
-        nome: this.nome,
         tipo: this.tipo,
         tamanho: this.tamanho,
         laminas: this.laminas,
+        extras: this.extras,
         paginas: this.paginas,
         capa: this.capa,
-        mostruario: this.mostruario,
         laminacao: this.laminacao,
-        obs: this.obs,
+        valor: this.valor,
         data: this.dataHora(),
       };
       this.$store.dispatch("createOS", obj);
@@ -294,7 +292,6 @@ export default {
           let p2 = this.precos.slim[ex];
           p2 = p2.replace(",", ".");
           valor += parseFloat(p2) * parseInt(this.extras);
-          console.log(valor, p1, p2);
         }
         this.valor = parseFloat(valor).toFixed(2);
       }
@@ -324,11 +321,8 @@ export default {
         if (el === "Baixo relevo") {
           el = "Gravação laser";
         }
-        if (el === "Box laço/foto" || el === "Maleta") {
+        if (el === "Box laço/foto") {
           el = "Caixa presente";
-        }
-        if (el === "Box couro legítimo") {
-          el = "Couro natural";
         }
         if (this.item[i]) {
           let ac = this.tamanho + "-" + el;
@@ -345,8 +339,8 @@ export default {
       if (el === "Tecido/sintético") {
         el = "Foto";
       }
-      if (el === "Madeira") {
-        el = "Couro natural";
+      if (el === "Capa Madeira") {
+        el = "Capa Couro natural";
       }
       if (el === "Capa acrílico") {
         el = "Capa cristal";
