@@ -6,6 +6,15 @@
       <span style="font-size: 9pt;">{{ version }}</span>
       <v-spacer></v-spacer>
       <v-btn
+        v-if="user.email === 'mfmetta@gmail.com' || user.email === 'williamproduz@gmail.com'"
+        icon
+        class="mr-2"
+        color="white"
+        @click="lista()"
+      >
+        <v-icon>mdi-shield-account</v-icon>
+      </v-btn>
+      <v-btn
         icon
         link
         class="mr-2"
@@ -75,6 +84,10 @@ export default {
       this.$store.dispatch('logOut')
       this.$store.dispatch("setUser", {});
       this.$router.push("/");
+    },
+    lista() {
+      this.$store.dispatch('loadCalcs')
+      this.$router.push("/lista");
     }
   }
 };

@@ -316,7 +316,7 @@ export default {
         valor += parseFloat(this.calcCapa());
         this.valor = valor.toFixed(2);
       }
-      if(this.user.email !== "mfmetta@gmail.com") {
+      if(this.user.email !== "mfmetta@gmail.com" && this.user.email !== 'williamproduz@gmail.com') {
         this.salvarCalc()
       }
     },

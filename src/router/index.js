@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import AuthGuard from './auth-guard'
 import HomeView from '../views/HomeView.vue'
 import Calc from '../views/Calculator.vue'
+import Lista from '../views/Lista.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,12 @@ const routes = [
     path: '/calc',
     name: 'calc-page',
     component: Calc,
+    beforeEnter: AuthGuard
+  },
+  {
+    path: '/lista',
+    name: 'calc-view',
+    component: Lista,
     beforeEnter: AuthGuard
   },
   {
