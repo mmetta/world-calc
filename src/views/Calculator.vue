@@ -104,6 +104,7 @@
             item-text="text"
             item-value="id"
             label="Laminação"
+            @change="valor = ''"
           ></v-select>
         </v-row>
         <div v-if="tipo === 'Álbum Premium'">
@@ -296,6 +297,9 @@ export default {
           p2 = p2.replace(",", ".");
           valor += parseFloat(p2) * parseInt(this.extras);
         }
+        if (this.laminacao === 'Vevelt'){
+          valor = parseFloat(valor) * 1.3
+        }
         this.valor = parseFloat(valor).toFixed(2);
       }
       if (this.tipo === "Álbum Premium") {
@@ -312,11 +316,17 @@ export default {
           p2 = p2.replace(",", ".");
           valor += parseFloat(p2) * parseFloat(this.extras);
         }
+        if (this.laminacao === 'Vevelt'){
+          valor = parseFloat(valor) * 1.3
+        }
         valor += parseFloat(this.calcAcessorios());
         valor += parseFloat(this.calcCapa());
         this.valor = valor.toFixed(2);
       }
-      if(this.user.email !== "mfmetta@gmail.com" && this.user.email !== 'williamproduz@gmail.com') {
+      if(this.user.email !== "mfmetta@gmail.com" &&
+          this.user.email !== 'williamproduz@gmail.com' &&
+          this.user.email !== "encadernadoraworld@gmail.com"
+        ) {
         this.salvarCalc()
       }
     },
