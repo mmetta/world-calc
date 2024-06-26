@@ -6,9 +6,7 @@
       <span style="font-size: 9pt;">{{ version }}</span>
       <v-spacer></v-spacer>
       <v-btn
-        v-if="user.email === 'mfmetta@gmail.com' ||
-        user.email === 'williamproduz@gmail.com' ||
-        user.email === 'encadernadoraworld@gmail.com'"
+        v-if="user.email === 'encadernadoraworld@gmail.com'"
         icon
         class="mr-2"
         color="white"
